@@ -16,10 +16,14 @@
   }
   tick();
   setInterval(tick, 1000);
+  
+  const FORM_ID = '1FAIpQLScwDgUbE1PQPDkXHyXKQ9kSmGkfq517Oc91xt25MONsOiMhGg';
+  const ENTRY_ID = 'entry.1149404765';
 
-  // ---- Form: mailto con validación ----
   const input = el('email');
   const error = el('email-error');
+  const success = el('email-success');
+  const btn = el('notify-btn');
 
   function submitEmail() {
     const value = input.value.trim();
@@ -30,11 +34,32 @@
       return;
     }
     error.classList.remove('visible');
-    const subject = encodeURIComponent('Agregar a lista de difusión');
-    const body = encodeURIComponent(value);
-    window.location.href = `mailto:info@lacazasubastas.com?subject=${subject}&body=${body}`;
+
+    // Estado de carga
+    btn.disabled = true;
+    btn.textContent = 'Enviando…';
+
+    const url = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
+    const data = new FormData();
+    data.append(ENTRY_ID, value);
+
+    // no-cors: Google no devuelve CORS, así que la respuesta es opaca.
+    // Si el fetch resuelve, asumimos éxito.
+    fetch(url, { method: 'POST', mode: 'no-cors', body: data })
+      .then(() => {
+        input.value = '';
+        input.style.display = 'none';
+        btn.style.display = 'none';
+        success.classList.add('visible');
+      })
+      .catch(() => {
+        btn.disabled = false;
+        btn.textContent = 'Avísenme';
+        error.textContent = 'No se pudo enviar. Intenta de nuevo.';
+        error.classList.add('visible');
+      });
   }
 
-  el('notify-btn').addEventListener('click', submitEmail);
+  btn.addEventListener('click', submitEmail);
   input.addEventListener('keydown', e => { if (e.key === 'Enter') submitEmail(); });
   input.addEventListener('input', () => error.classList.remove('visible'));

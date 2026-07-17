@@ -216,6 +216,17 @@
     color: var(--rojo);
   }
   .form-error.visible { display: block; }
+  .notify button:disabled { opacity: 0.6; cursor: default; }
+  .form-success {
+    display: none;
+    margin-top: 8px;
+    text-align: left;
+    font-family: 'Luciole', Verdana, sans-serif;
+    text-transform: none;
+    font-size: 15px;
+    color: var(--azul);
+  }
+  .form-success.visible { display: block; }
 
   /* ============ CONTACTO ============ */
   .contact {
