@@ -1,0 +1,267 @@
+/* ============ FUENTES ============
+     Colocar los archivos en /fonts/ con estos nombres
+     (o ajustar src). Fallbacks activos mientras tanto. */
+  @font-face {
+    font-family: 'Novecento';
+    src: url('../fonts/Novecento-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Novecento';
+    src: url('../fonts/Novecento-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Luciole';
+    src: url('../fonts/Luciole-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+  }
+
+  :root {
+    --bg-deep: #0d1b3e;
+    --bg-mid: #122452;
+    --crema: #f5f1e6;
+    --azul: #3560e0;
+    --azul-claro: #8fa8f0;
+    --rojo: #e04a3a;
+    --ring: rgba(143, 168, 240, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    font-family: 'Novecento', 'Arial Narrow', Futura, sans-serif;
+    background: radial-gradient(ellipse at 50% 42%, var(--bg-mid) 0%, var(--bg-deep) 62%);
+    color: var(--crema);
+    text-transform: uppercase;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ============ DECORACIÓN: anillos y formas ============ */
+  .rings, .shapes {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ring {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid var(--ring);
+    border-radius: 50%;
+  }
+  .ring:nth-child(1) { width: 62vmin;  height: 62vmin; }
+  .ring:nth-child(2) { width: 100vmin; height: 100vmin; }
+  .ring:nth-child(3) { width: 140vmin; height: 140vmin; }
+  .ring:nth-child(4) { width: 185vmin; height: 185vmin; }
+
+  .shape { position: absolute; }
+  .dot-lg {
+    width: 108px; height: 108px; border-radius: 50%;
+    background: var(--azul);
+    top: 15%; left: 8%;
+  }
+  .dot-sm {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--azul-claro);
+    top: 12%; left: 14.5%;
+  }
+  .dot-xs {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--azul);
+    bottom: 22%; left: 12%;
+  }
+  .tri {
+    width: 0; height: 0;
+    border-top: 34px solid transparent;
+    border-bottom: 34px solid transparent;
+    border-right: 56px solid var(--azul);
+    top: 21%; right: 10%;
+  }
+  .wave {
+    bottom: 19%; right: 7%;
+    width: 150px; height: 26px;
+  }
+  .wave path { stroke: var(--azul); stroke-width: 3; fill: none; stroke-linecap: round; }
+
+  /* ============ LAYOUT ============ */
+  main {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(48px, 8vh, 90px) 24px 40px;
+  }
+
+  .eyebrow {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.35em;
+    color: var(--azul-claro);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--rojo);
+  }
+
+  .logo {
+    margin-top: clamp(36px, 6vh, 72px);
+    height: 150px;
+  }
+
+  .tagline {
+    margin-top: clamp(24px, 4vh, 40px);
+    font-weight: 700;
+    font-size: clamp(18px, 2.4vw, 24px);
+    letter-spacing: 0.14em;
+    color: var(--crema);
+  }
+
+  /* ============ COUNTDOWN ============ */
+  .countdown {
+    margin-top: clamp(32px, 5vh, 56px);
+    display: flex;
+    gap: clamp(24px, 5vw, 64px);
+  }
+  .cd-unit { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .cd-num {
+    font-weight: 700;
+    font-size: clamp(44px, 6vw, 64px);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--crema);
+  }
+  .cd-label {
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--azul-claro);
+    border-top: 2px solid var(--azul);
+    padding-top: 8px;
+    min-width: 56px;
+  }
+
+  .address {
+    margin-top: clamp(32px, 5vh, 52px);
+    font-size: 15px;
+    letter-spacing: 0.14em;
+    color: var(--azul-claro);
+  }
+
+  /* ============ FORM ============ */
+  .notify {
+    margin-top: clamp(24px, 4vh, 40px);
+    width: min(470px, 100%);
+  }
+  .notify-row {
+    display: flex;
+    width: 100%;
+  }
+  .notify input[type="text"] {
+    flex: 1;
+    min-width: 0;
+    padding: 17px 20px;
+    font-family: 'Luciole', Verdana, sans-serif;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    background: var(--crema);
+    color: var(--bg-deep);
+    border-radius: 6px 0 0 6px;
+  }
+  .notify input[type="text"]:focus-visible {
+    box-shadow: inset 0 0 0 3px var(--azul);
+  }
+  .notify button {
+    padding: 17px 26px;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    background: var(--azul);
+    color: #fff;
+    border-radius: 0 6px 6px 0;
+    transition: background 0.15s;
+  }
+  .notify button:hover { background: #2a4fc4; }
+  .notify button:focus-visible { outline: 3px solid var(--crema); outline-offset: 2px; }
+  .form-error {
+    display: none;
+    margin-top: 8px;
+    text-align: left;
+    font-family: 'Luciole', Verdana, sans-serif;
+    text-transform: none;
+    font-size: 13px;
+    color: var(--rojo);
+  }
+  .form-error.visible { display: block; }
+
+  /* ============ CONTACTO ============ */
+  .contact {
+    margin-top: clamp(40px, 7vh, 72px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 44px;
+    font-family: 'Luciole', Verdana, sans-serif;
+    text-transform: none;
+    font-size: 15px;
+  }
+  .contact a {
+    color: var(--crema);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    letter-spacing: 0.06em;
+  }
+  .contact a:hover { color: var(--azul-claro); }
+  .contact a:focus-visible { outline: 2px solid var(--azul-claro); outline-offset: 4px; }
+  .contact svg { width: 18px; height: 18px; flex: none; }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 28px 24px 36px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: rgba(143, 168, 240, 0.55);
+  }
+
+  @media (max-width: 560px) {
+    .countdown { gap: 18px; }
+    .dot-lg { width: 70px; height: 70px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .shape { animation: drift 9s ease-in-out infinite alternate; }
+    .dot-sm { animation-duration: 7s; }
+    .tri { animation-duration: 11s; }
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to   { transform: translateY(-14px); }
+    }
+  }
