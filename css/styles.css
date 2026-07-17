@@ -276,6 +276,21 @@
     .contact { gap: 16px 28px; font-size: 14px; }
   }
 
+  /* Teléfono en horizontal: viewport bajo y ancho. Se comprime el
+     ritmo vertical y se reduce el logo para que el hero respire. */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .shapes { display: none; }
+    main { padding: 26px 24px 24px; }
+    .logo { margin-top: 18px; width: min(52%, 360px); }
+    .tagline { margin-top: 14px; font-size: clamp(16px, 2.2vw, 22px); }
+    .countdown { margin-top: 18px; gap: clamp(20px, 5vw, 48px); }
+    .cd-num { font-size: clamp(32px, 5vw, 44px); }
+    .address { margin-top: 16px; }
+    .notify { margin-top: 16px; }
+    .contact { margin-top: 20px; }
+    footer { padding: 18px 24px 22px; }
+  }
+
   @media (prefers-reduced-motion: no-preference) {
     .shape { animation: drift 9s ease-in-out infinite alternate; }
     .dot-sm { animation-duration: 7s; }
